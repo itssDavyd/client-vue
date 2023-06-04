@@ -39,7 +39,11 @@ export default {
   },
   async created() {
     const res = await axios.get('user');
-    this.user = res.data.user;
+    if (res.data.status == 200) {
+      this.user = res.data.user;
+    } else {
+      this.user = false;
+    }
   }
 }
 </script>

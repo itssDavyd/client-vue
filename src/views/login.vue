@@ -41,9 +41,17 @@ export default {
         email: this.email,
         password: this.password
       }
-      const res = await axios.post('login', data);
-      localStorage.setItem('token', res.data.token);
-      this.$router.push('/');
+      await axios.post('login', data).then(
+          response => {
+            localStorage.setItem('token', response.data.token);
+            this.$router.push('/');
+          }
+      ).catch(
+          err => {
+            alert(err.response);
+          }
+      );
+
     }
   }
 }
